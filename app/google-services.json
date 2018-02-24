@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "290492997147",
+    "firebase_url": "https://womentor-9c7cb.firebaseio.com",
+    "project_id": "womentor-9c7cb",
+    "storage_bucket": "womentor-9c7cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290492997147:android:055a2fd27ad16e76",
+        "android_client_info": {
+          "package_name": "me.ancyphilip.womentor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290492997147-1go5gjd6aqlivjtmbjuqg09r24b1ic2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.ancyphilip.womentor",
+            "certificate_hash": "c5fb33d35ede9b7b228336fec3a283b3fe2d110b"
+          }
+        },
+        {
+          "client_id": "290492997147-js833tl8l3odf5bfmmhkj6uo03f58pnm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHCWLUD6Db5DAG-dyg1pwo58lRM0kdkkI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290492997147-js833tl8l3odf5bfmmhkj6uo03f58pnm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

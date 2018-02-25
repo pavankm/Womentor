@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        usersDb = FirebaseDatabase.getInstance().getReference().child("Users");
         mauth = FirebaseAuth.getInstance();
         checkUserType();
 
@@ -63,15 +63,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
+               cards obj = (cards) dataObject;
+               String userId = obj.getUserId();
+
+               usersDb.child(oppositeUserType).child(userId).child("connections").child("nope").child(currentUId).setValue(true);
+
                 Toast.makeText(MainActivity.this,"left",Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
+                cards obj = (cards) dataObject;
+                String userId = obj.getUserId();
+
+                usersDb.child(oppositeUserType).child(userId).child("connections").child("yup").child(currentUId).setValue(true);
+
 
                 Toast.makeText(MainActivity.this,"right",Toast.LENGTH_LONG).show();
             }
@@ -141,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         DatabaseReference menteeDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Mentee");
-        mentorDb.addChildEventListener(new ChildEventListener() {
+        menteeDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -183,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 
-                if(dataSnapshot.exists()){
+                if(dataSnapshot.exists() &&!dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)){
 
 
                     cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());

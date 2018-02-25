@@ -20,12 +20,15 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import me.ancyphilip.womentor.Cards.arrayAdapter;
+import me.ancyphilip.womentor.Cards.cards;
+import me.ancyphilip.womentor.Matches.MatchesActivity;
 
 public class MainActivity extends AppCompatActivity {
     private cards cards_data[];
 
-    private arrayAdapter arrayAdapter;
+    private me.ancyphilip.womentor.Cards.arrayAdapter arrayAdapter;
     private int i;
 
     private FirebaseAuth mauth;
@@ -222,5 +225,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
 
+    }
+
+    public void goToMatches(View view) {
+        Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
+        startActivity(intent);
     }
 }

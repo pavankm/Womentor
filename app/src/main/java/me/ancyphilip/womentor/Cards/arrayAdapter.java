@@ -1,4 +1,4 @@
-package me.ancyphilip.womentor;
+package me.ancyphilip.womentor.Cards;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import javax.microedition.khronos.opengles.GL;
+import me.ancyphilip.womentor.Cards.cards;
+import me.ancyphilip.womentor.R;
 
 /**
  * Created by ancyphilip on 2/24/18.

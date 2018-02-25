@@ -1,4 +1,4 @@
-package me.ancyphilip.womentor;
+package me.ancyphilip.womentor.Cards;
 
 /**
  * Created by ancyphilip on 2/24/18.

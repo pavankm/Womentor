@@ -20,6 +20,7 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private cards cards_data[];
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 cards obj = (cards) dataObject;
                 String userId = obj.getUserId();
 
-                usersDb.child(oppositeUserType).child(userId).child("connections").child("nope").child(currentUId).setValue(true);
+                usersDb.child(userId).child("connections").child("nope").child(currentUId).setValue(true);
 
                 Toast.makeText(MainActivity.this, "left", Toast.LENGTH_LONG).show();
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 cards obj = (cards) dataObject;
                 String userId = obj.getUserId();
 
-                usersDb.child(oppositeUserType).child(userId).child("connections").child("yup").child(currentUId).setValue(true);
+                usersDb.child(userId).child("connections").child("yup").child(currentUId).setValue(true);
 
                 isConnectionMatch(userId);
                 Toast.makeText(MainActivity.this, "right", Toast.LENGTH_LONG).show();
@@ -108,14 +109,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void isConnectionMatch(String userId) {
-        final DatabaseReference currentUserConnectionsDb = usersDb.child(userType).child(currentUId).child("connections").child("yup").child(userId);
+        final DatabaseReference currentUserConnectionsDb = usersDb.child(currentUId).child("connections").child("yup").child(userId);
         currentUserConnectionsDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Toast.makeText(MainActivity.this, "new connection", Toast.LENGTH_LONG).show();
-                    usersDb.child(oppositeUserType).child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
-                    usersDb.child(userType).child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
+                    usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
+                    usersDb.child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
                 }
             }
 
@@ -130,89 +131,50 @@ public class MainActivity extends AppCompatActivity {
     private String oppositeUserType;
 
     public void checkUserType() {
+        //TODO: Add prefernces child for interest in both usertypes
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        DatabaseReference mentorDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Mentor");
-        mentorDb.addChildEventListener(new ChildEventListener() {
+        DatabaseReference userDb = usersDb.child(user.getUid());
+        userDb.addListenerForSingleValueEvent((new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.child("type").getValue() != null) {
+                        userType = dataSnapshot.child("type").getValue().toString();
+                        switch (userType) {
+                            case "Mentor":
+                                oppositeUserType = "Mentee";
+                                break;
+                            case "Mentee":
+                                oppositeUserType = "Mentor";
+                                break;
 
+                        }
+                        getOppositeTypeUser();
+                    }
 
-                if (dataSnapshot.getKey().equals(user.getUid())) {
-                    userType = "Mentor";
-                    oppositeUserType = "Mentee";
-                    getOppositeTypeUser();
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        }));
 
-
-        DatabaseReference menteeDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Mentee");
-        menteeDb.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-                if (dataSnapshot.getKey().equals(user.getUid())) {
-                    userType = "Mentee";
-                    oppositeUserType = "Mentor";
-                    getOppositeTypeUser();
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public void getOppositeTypeUser() {
 
-        DatabaseReference oppositeTypeDb = FirebaseDatabase.getInstance().getReference().child("Users").child(oppositeUserType);
-        oppositeTypeDb.addChildEventListener(new ChildEventListener() {
+        usersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 
-                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)) {
-                    String profileImageUrl = "default";
+                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)
+                        && dataSnapshot.child("type").getValue().toString().equals(oppositeUserType)) {
+                    String profileImageUrl = "https://firebasestorage.googleapis.com/v0/b/womentor-9c7cb.appspot.com/o/profileImages%2Fic_woman-web.png?alt=media&token=f070883a-b42a-42b8-8bf4-fb2378f7e8f6";
                     if (!dataSnapshot.child("profileImageUrl").getValue().equals("default")) {
                         profileImageUrl = dataSnapshot.child("profileImageUrl").getValue().toString();
                     }
@@ -258,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToSettings(View view) {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-        intent.putExtra("userType", userType);
         startActivity(intent);
+
     }
 }

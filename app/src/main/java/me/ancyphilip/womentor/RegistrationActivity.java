@@ -41,9 +41,9 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
+                if (user != null) {
 
-                    Intent intent  = new Intent(RegistrationActivity.this, MainActivity.class);
+                    Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     return;
@@ -52,19 +52,19 @@ public class RegistrationActivity extends AppCompatActivity {
         };
 
         mRegister = (Button) findViewById(R.id.register);
-        mName =(EditText) findViewById(R.id.name) ;
+        mName = (EditText) findViewById(R.id.name);
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
-        mRadioGroup =(RadioGroup)findViewById(R.id.radioGroup) ;
+        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                int  selectId = mRadioGroup.getCheckedRadioButtonId();
+                int selectId = mRadioGroup.getCheckedRadioButtonId();
                 final RadioButton radioButton = (RadioButton) findViewById(selectId);
 
-                if(radioButton.getText()== null) {
+                if (radioButton.getText() == null) {
                     return;
                 }
 
@@ -77,15 +77,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(!task.isSuccessful()) {
-                            Toast.makeText(RegistrationActivity.this, "sign up error",Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        } else {
                             String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString()).child(userId).child("name");
-                            Map userInfo = new HashMap<String, String>();
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                            Map userInfo = new HashMap<String, Object>();
                             userInfo.put("name", name);
-                            userInfo.put("profileImageUrl", "default");
+                            userInfo.put("profileImageUrl", "https://firebasestorage.googleapis.com/v0/b/womentor-9c7cb.appspot.com/o/profileImages%2Fic_woman-web.png?alt=media&token=f070883a-b42a-42b8-8bf4-fb2378f7e8f6");
+                            userInfo.put("type", radioButton.getText().toString());
 
                             currentUserDb.updateChildren(userInfo);
                         }

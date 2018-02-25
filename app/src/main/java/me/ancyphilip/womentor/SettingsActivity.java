@@ -52,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         String userType = getIntent().getExtras().getString("userType");
+        // TODO: 2/24/18 more fields for profile information
         myNameField = (EditText) findViewById(R.id.name);
         mPhoneField = (EditText) findViewById(R.id.phone);
         mProfileImage = findViewById(R.id.profileImage);
@@ -102,7 +103,17 @@ public class SettingsActivity extends AppCompatActivity {
                         phone = map.get("phone").toString();
                         mPhoneField.setText(phone);
                     }
+                    Glide.clear(mProfileImage);
                     if (map.get("profileImageUrl") != null) {
+                        switch ((String)map.get("profileImageUrl")) {
+                            case "default":
+                                Glide.with(getApplication()).load(R.mipmap.ic_launcher).into(mProfileImage);
+                                break;
+                            default:
+
+                                Glide.with(getApplication()).load(map.get("profileImageUrl")).into(mProfileImage);
+                                break;
+                        }
                         profileImgUrl = map.get("profileImageUrl").toString();
                         Glide.with(getApplication()).load(profileImgUrl).into(mProfileImage);
                     }
@@ -149,7 +160,7 @@ public class SettingsActivity extends AppCompatActivity {
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl= taskSnapshot.getDownloadUrl();
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     Map userInfo = new HashMap();
                     userInfo.put("profileImageUrl", downloadUrl.toString());
                     mCustomerDatabase.updateChildren(userInfo);
@@ -167,7 +178,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && requestCode == Activity.RESULT_OK) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             final Uri imageURI = data.getData();
             resultUri = imageURI;
             mProfileImage.setImageURI(resultUri);

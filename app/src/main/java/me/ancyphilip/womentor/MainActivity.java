@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         rowItems = new ArrayList<cards>();
 
 
-        arrayAdapter = new arrayAdapter(this, R.layout.item,rowItems);
+        arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems);
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
         flingContainer.setAdapter(arrayAdapter);
@@ -66,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-               cards obj = (cards) dataObject;
-               String userId = obj.getUserId();
+                cards obj = (cards) dataObject;
+                String userId = obj.getUserId();
 
-               usersDb.child(oppositeUserType).child(userId).child("connections").child("nope").child(currentUId).setValue(true);
+                usersDb.child(oppositeUserType).child(userId).child("connections").child("nope").child(currentUId).setValue(true);
 
-                Toast.makeText(MainActivity.this,"left",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_LONG).show();
 
             }
 
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 usersDb.child(oppositeUserType).child(userId).child("connections").child("yup").child(currentUId).setValue(true);
 
                 isConnectionMatch(userId);
-                Toast.makeText(MainActivity.this,"right",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onScroll(float scrollProgressPercent) {
 
-                  }
+            }
         });
 
 
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
-                Toast.makeText(MainActivity.this,"click",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         currentUserConnectionsDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     Toast.makeText(MainActivity.this, "new connection", Toast.LENGTH_LONG).show();
                     usersDb.child(oppositeUserType).child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
                     usersDb.child(userType).child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
@@ -140,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 
-                if(dataSnapshot.getKey().equals(user.getUid())){
+                if (dataSnapshot.getKey().equals(user.getUid())) {
                     userType = "Mentor";
-                    oppositeUserType="Mentee";
+                    oppositeUserType = "Mentee";
                     getOppositeTypeUser();
                 }
             }
@@ -175,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 
-                if(dataSnapshot.getKey().equals(user.getUid())){
+                if (dataSnapshot.getKey().equals(user.getUid())) {
                     userType = "Mentee";
-                    oppositeUserType="Mentor";
+                    oppositeUserType = "Mentor";
                     getOppositeTypeUser();
                 }
             }
@@ -212,10 +211,12 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 
-                if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)){
-
-
-                    cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());
+                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)) {
+                    String profileImageUrl = "default";
+                    if (!dataSnapshot.child("profileImageUrl").getValue().equals("default")) {
+                        profileImageUrl = dataSnapshot.child("profileImageUrl").getValue().toString();
+                    }
+                    cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), profileImageUrl);
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
 
@@ -244,8 +245,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     public void logoutUser(View view) {
         mauth.signOut();
         Intent intent = new Intent(MainActivity.this, ChooseLoginOrRegistrationActivity.class);

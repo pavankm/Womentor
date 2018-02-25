@@ -202,39 +202,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        DatabaseReference menteeDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Mentee");
-        mentorDb.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-                if(dataSnapshot.getKey().equals(user.getUid())){
-                    userType = "Mentee";
-                    oppositeUserType="Mentor";
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
 
     }
     public void logoutUser(View view) {

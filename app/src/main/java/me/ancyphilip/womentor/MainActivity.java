@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                 usersDb.child(oppositeUserType).child(userId).child("connections").child("yup").child(currentUId).setValue(true);
 
-
+                isConnectionMatch(userId);
                 Toast.makeText(MainActivity.this,"right",Toast.LENGTH_LONG).show();
             }
 
@@ -105,6 +106,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void isConnectionMatch(String userId) {
+        final DatabaseReference currentUserConnectionsDb = usersDb.child(userType).child(currentUId).child("connections").child("yup").child(userId);
+        currentUserConnectionsDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    Toast.makeText(MainActivity.this, "new connection", Toast.LENGTH_LONG).show();
+                    usersDb.child(oppositeUserType).child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
+                    usersDb.child(userType).child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private String userType;
@@ -235,4 +255,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void goToSettings(View view) {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
+    }
 }

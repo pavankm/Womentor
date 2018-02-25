@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         usersDb = FirebaseDatabase.getInstance().getReference().child("Users");
         mauth = FirebaseAuth.getInstance();
+        currentUId = mauth.getCurrentUser().getUid();
+
         checkUserType();
 
 
@@ -190,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 
-                if(dataSnapshot.exists() &&!dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)){
+                if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yup").hasChild(currentUId)){
 
 
                     cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());

@@ -55,11 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(!task.isSuccessful()) {
-<<<<<<< HEAD
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
-=======
-                            Toast.makeText(LoginActivity.this, "login error",Toast.LENGTH_LONG).show();
->>>>>>> 9450eff... linkedin changes
                         }
 
                     }

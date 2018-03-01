@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 include ':app'
-=======
-include ':app', ':linkedin-sdk'
->>>>>>> 9450eff... linkedin changes

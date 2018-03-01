@@ -1,14 +1,10 @@
 package me.ancyphilip.womentor.Chat;
 
-<<<<<<< HEAD
 import android.provider.ContactsContract;
-=======
->>>>>>> 9450eff... linkedin changes
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-<<<<<<< HEAD
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,11 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-=======
-
-import java.util.ArrayList;
-import java.util.List;
->>>>>>> 9450eff... linkedin changes
 
 import me.ancyphilip.womentor.Matches.MatchesAdapter;
 import me.ancyphilip.womentor.Matches.MatchesObject;
@@ -39,23 +30,18 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mChatAdapter;
     private RecyclerView.LayoutManager mChatLayoutManager;
-<<<<<<< HEAD
     private String currentUserID, matchId;
     private EditText mSendEditText;
     private Button msendButton;
 
     DatabaseReference mDatabaseUser, mDatabaseChat;
     private String chatId;
-=======
-
->>>>>>> 9450eff... linkedin changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-<<<<<<< HEAD
         matchId = getIntent().getExtras().getString("matchId");
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users")
@@ -67,18 +53,12 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(false);
-=======
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(true);
->>>>>>> 9450eff... linkedin changes
 
         mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
         mRecyclerView.setLayoutManager(mChatLayoutManager);
         mChatAdapter = new ChatAdapter(getDataSetChat(), ChatActivity.this);
         mRecyclerView.setAdapter(mChatAdapter);
 
-<<<<<<< HEAD
         mSendEditText = findViewById(R.id.message);
         msendButton = findViewById(R.id.send);
         msendButton.setOnClickListener(new View.OnClickListener() {
@@ -178,11 +158,5 @@ public class ChatActivity extends AppCompatActivity {
 
     private List<ChatObject> getDataSetChat() {
         return resultsChat;
-=======
-    }
-
-    private List<ChatObject> resultsChat = new ArrayList<>();
-    private List<ChatObject> getDataSetChat() { return resultsChat;
->>>>>>> 9450eff... linkedin changes
     }
 }

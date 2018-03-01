@@ -7,12 +7,8 @@
     tools:context="me.ancyphilip.womentor.Chat.ChatActivity">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="match_parent"
         android:layout_above="@+id/sendLayout">
-=======
-        android:layout_height="match_parent">
->>>>>>> 9450eff... linkedin changes
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -23,10 +19,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
-<<<<<<< HEAD
         android:id="@+id/sendLayout"
-=======
->>>>>>> 9450eff... linkedin changes
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -36,12 +29,8 @@
             android:layout_weight="0.8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
             android:hint="message ..."
             android:id="@+id/message"/>
-=======
-            android:hint="message ..."/>
->>>>>>> 9450eff... linkedin changes
         <Button
             android:layout_weight="0.2"
             android:layout_width="0dp"

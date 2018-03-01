@@ -32,7 +32,6 @@
         android:inputType="phone"
         android:layout_marginBottom="20sp"/>
 
-<<<<<<< HEAD
     <me.gujun.android.taggroup.TagGroup
         android:id="@+id/tag_group_mentor"
         style="@style/TagGroup" />
@@ -53,8 +52,6 @@
         app:cp_textPaddingTop="5dp"
         app:cp_simplified="false" />
 
-=======
->>>>>>> 9450eff... linkedin changes
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,12 +63,4 @@
         android:layout_height="wrap_content"
         android:text="back"
         android:id="@+id/back"/>
-<<<<<<< HEAD
-=======
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="connect with linkedin"
-        android:id="@+id/linkedin"/>
->>>>>>> 9450eff... linkedin changes
 </LinearLayout>

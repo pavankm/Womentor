@@ -15,27 +15,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-<<<<<<< HEAD
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.io.Serializable;
-=======
-import com.google.firebase.database.ValueEventListener;
-import com.lorentzos.flingswipe.SwipeFlingAdapterView;
-
->>>>>>> 9450eff... linkedin changes
 import java.util.ArrayList;
 import java.util.List;
 
 import me.ancyphilip.womentor.Cards.arrayAdapter;
 import me.ancyphilip.womentor.Cards.cards;
 import me.ancyphilip.womentor.Matches.MatchesActivity;
-<<<<<<< HEAD
 import me.ancyphilip.womentor.Models.DomainModel;
-=======
->>>>>>> 9450eff... linkedin changes
 
 public class MainActivity extends AppCompatActivity {
     private cards cards_data[];
@@ -48,11 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private String currentUId;
     private DatabaseReference usersDb;
 
-<<<<<<< HEAD
     private ArrayList<DomainModel> domainsList = new ArrayList<DomainModel>();
 
-=======
->>>>>>> 9450eff... linkedin changes
     ListView listView;
     List<cards> rowItems;
 
@@ -135,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Toast.makeText(MainActivity.this, "new connection", Toast.LENGTH_LONG).show();
-<<<<<<< HEAD
 
                     String key=FirebaseDatabase.getInstance().getReference().child("Chat").push().getKey();
                     //usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
@@ -144,10 +131,6 @@ public class MainActivity extends AppCompatActivity {
                     //usersDb.child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
                     usersDb.child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).child("ChatId").setValue(key);
 
-=======
-                    usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
-                    usersDb.child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
->>>>>>> 9450eff... linkedin changes
                 }
             }
 
@@ -250,7 +233,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToSettings(View view) {
-<<<<<<< HEAD
         final Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         DatabaseReference domainsDb = FirebaseDatabase.getInstance().getReference().child("Domains");
         final Query query = domainsDb.orderByKey();
@@ -277,9 +259,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToDiscover(View view) {
         Intent intent = new Intent(MainActivity.this, DiscoverActivity.class);
-=======
-        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
->>>>>>> 9450eff... linkedin changes
         startActivity(intent);
 
     }

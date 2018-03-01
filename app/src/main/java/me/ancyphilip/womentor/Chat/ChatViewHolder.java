@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+<<<<<<< HEAD
 import android.widget.LinearLayout;
+=======
+>>>>>>> 9450eff... linkedin changes
 import android.widget.TextView;
 
 import me.ancyphilip.womentor.R;
@@ -15,17 +18,24 @@ import me.ancyphilip.womentor.R;
  */
 
 public class ChatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+<<<<<<< HEAD
     public TextView mMessage;
     public LinearLayout mContainer;
+=======
+
+>>>>>>> 9450eff... linkedin changes
 
     public ChatViewHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
 
+<<<<<<< HEAD
         mMessage = itemView.findViewById(R.id.message);
         mContainer = itemView.findViewById(R.id.container);
 
 
+=======
+>>>>>>> 9450eff... linkedin changes
     }
 
     @Override

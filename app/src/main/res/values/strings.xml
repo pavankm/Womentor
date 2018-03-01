@@ -1,4 +1,8 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">Womentor</string>
+=======
+    <string name="app_name">womentor</string>
+>>>>>>> 9450eff... linkedin changes
     <string name="title_activity_matches">MatchesActivity</string>
 </resources>

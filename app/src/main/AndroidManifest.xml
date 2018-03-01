@@ -20,7 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistrationActivity" />
+<<<<<<< HEAD
         <activity android:name=".DiscoverActivity" />
+=======
+>>>>>>> 9450eff... linkedin changes
         <activity android:name=".LoginActivity" />
         <activity android:name=".SettingsActivity" />
         <activity

@@ -4,14 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:orientation="vertical"
     tools:context="me.ancyphilip.womentor.MainActivity">
+=======
+    tools:context="me.ancyphilip.womentor.MainActivity"
+    android:orientation="vertical">
+>>>>>>> 9450eff... linkedin changes
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+<<<<<<< HEAD
 
         <Button
             android:layout_width="wrap_content"
@@ -42,13 +48,43 @@
             android:onClick="goToMatches"
             android:text="Matches"
             />
+=======
+    <Button
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SignOut"
+        android:onClick="logoutUser"/>
+
+    <Button
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToSettings"
+        android:text="Settings"
+        />
+
+        <Button
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToMatches"
+        android:text="Matches"
+        />
+>>>>>>> 9450eff... linkedin changes
     </LinearLayout>
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
+<<<<<<< HEAD
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffeee9e2"
+=======
+        android:background="#ffeee9e2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>>>>>>> 9450eff... linkedin changes
         app:rotation_degrees="15.5"
         tools:context=".MyActivity" />
 

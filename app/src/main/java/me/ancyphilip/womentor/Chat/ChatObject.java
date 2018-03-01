@@ -6,6 +6,7 @@ package me.ancyphilip.womentor.Chat;
 
 public class ChatObject {
 
+<<<<<<< HEAD
 
     private String message;
     private Boolean currentUser;
@@ -32,4 +33,15 @@ public class ChatObject {
     public void setCurrentUser(Boolean currentUser) {
         this.currentUser = currentUser;
     }
+=======
+    private String userId;
+
+
+    public ChatObject() {
+
+
+    }
+
+
+>>>>>>> 9450eff... linkedin changes
 }

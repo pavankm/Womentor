@@ -20,6 +20,10 @@ import me.ancyphilip.womentor.R;
  */
 
 public class arrayAdapter extends ArrayAdapter<cards> {
+<<<<<<< HEAD
+=======
+    Context context;
+>>>>>>> 9450eff... linkedin changes
 
     public arrayAdapter(Context context, int resourceId, List<cards> items) {
         super(context, resourceId, items);

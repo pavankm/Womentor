@@ -15,15 +15,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.ancyphilip.womentor.Cards.arrayAdapter;
 import me.ancyphilip.womentor.Cards.cards;
 import me.ancyphilip.womentor.Matches.MatchesActivity;
+import me.ancyphilip.womentor.Models.DomainModel;
 
 public class MainActivity extends AppCompatActivity {
     private cards cards_data[];
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String currentUId;
     private DatabaseReference usersDb;
+
+    private ArrayList<DomainModel> domainsList = new ArrayList<DomainModel>();
 
     ListView listView;
     List<cards> rowItems;
@@ -228,7 +233,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToSettings(View view) {
-        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        final Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        DatabaseReference domainsDb = FirebaseDatabase.getInstance().getReference().child("Domains");
+        final Query query = domainsDb.orderByKey();
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    domainsList.add(postSnapshot.getValue(DomainModel.class));
+                }
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",(Serializable)domainsList);
+                intent.putExtra("BUNDLE",args);
+                startActivity(intent);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+
+    public void goToDiscover(View view) {
+        Intent intent = new Intent(MainActivity.this, DiscoverActivity.class);
         startActivity(intent);
 
     }

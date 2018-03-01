@@ -4,43 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.ancyphilip.womentor.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="me.ancyphilip.womentor.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-    <Button
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SignOut"
-        android:onClick="logoutUser"/>
-
-    <Button
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToSettings"
-        android:text="Settings"
-        />
 
         <Button
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToMatches"
-        android:text="Matches"
-        />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="logoutUser"
+            android:text="SignOut" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="goToDiscover"
+            android:text="Discover" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="goToSettings"
+            android:text="Settings"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="goToMatches"
+            android:text="Matches"
+            />
     </LinearLayout>
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
-        android:background="#ffeee9e2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffeee9e2"
         app:rotation_degrees="15.5"
         tools:context=".MyActivity" />
 

@@ -32,6 +32,26 @@
         android:inputType="phone"
         android:layout_marginBottom="20sp"/>
 
+    <me.gujun.android.taggroup.TagGroup
+        android:id="@+id/tag_group_mentor"
+        style="@style/TagGroup" />
+
+    <com.anton46.collectionitempicker.CollectionPicker
+        android:id="@+id/collection_item_picker_mentor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:cp_addIcon="@android:drawable/ic_menu_add"
+        app:cp_cancelIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:cp_itemBackgroundNormal="@color/blue"
+        app:cp_itemBackgroundPressed="@color/red"
+        app:cp_itemMargin="5dp"
+        app:cp_textPaddingBottom="5dp"
+        app:cp_textPaddingLeft="10dp"
+        app:cp_textPaddingRight="10dp"
+        app:cp_textPaddingTop="5dp"
+        app:cp_simplified="false" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

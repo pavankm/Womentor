@@ -63,4 +63,9 @@
         android:layout_height="wrap_content"
         android:text="back"
         android:id="@+id/back"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="connect with linkedin"
+        android:id="@+id/linkedin"/>
 </LinearLayout>

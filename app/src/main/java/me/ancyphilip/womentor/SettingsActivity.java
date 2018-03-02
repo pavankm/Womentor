@@ -2,6 +2,9 @@ package me.ancyphilip.womentor;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +13,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +37,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.linkedin.platform.APIHelper;
+import com.linkedin.platform.LISessionManager;
+import com.linkedin.platform.errors.LIApiError;
+import com.linkedin.platform.errors.LIAuthError;
+import com.linkedin.platform.listeners.ApiListener;
+import com.linkedin.platform.listeners.ApiResponse;
+import com.linkedin.platform.listeners.AuthListener;
+import com.linkedin.platform.utils.Scope;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,10 +60,8 @@ import me.gujun.android.taggroup.TagGroup;
 public class SettingsActivity extends AppCompatActivity {
 
 
-    private EditText myNameField;
-    private EditText mPhoneField;
-    private Button mBack;
-    private Button mConfirm;
+    private EditText myNameField, mPhoneField;
+    private Button mBack, mConfirm;
     private ImageView mProfileImage;
 
     private FirebaseAuth mAuth;
@@ -114,6 +126,29 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Button linkedInButton = (Button) findViewById(R.id.linkedin);
+        linkedInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLinkedIn();
+                computePakageHash();
+            }
+        });
+    }
+
+    private void computePakageHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "me.ancyphilip.womentor",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (Exception e) {
+            Log.e("TAG", e.getMessage());
+        }
     }
 
     private void getUserInfo() {
@@ -215,6 +250,7 @@ public class SettingsActivity extends AppCompatActivity {
             mProfileImage.setImageURI(resultUri);
 
         }
+        LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void updateMentorsList() {
@@ -227,7 +263,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> snapshots = dataSnapshot.getChildren();
-                for (DataSnapshot dataSnapshot1: snapshots) {
+                for (DataSnapshot dataSnapshot1 : snapshots) {
                     if (0L == (long) dataSnapshot1.getValue()) {
                         menteeDomains.add(domainMap.get(dataSnapshot1.getKey()));
                     } else {
@@ -235,7 +271,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }
                 TagGroup mTagGroupMentor = (TagGroup) findViewById(R.id.tag_group_mentor);
-                if(menteeDomains.size() > 0) {
+                if (menteeDomains.size() > 0) {
 
                     String[] mentorDomainStrings = new String[mentorDomains.size()];
                     mentorDomainStrings = mentorDomains.toArray(mentorDomainStrings);
@@ -251,8 +287,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-
-
         final List<Item> items = new ArrayList<>();
         for (DomainModel domainModel : domainsList) {
             items.add(new Item(domainModel.getId(), domainModel.getName()));
@@ -263,6 +297,60 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(Item item, int position) {
                 Toast.makeText(getApplicationContext(), "clicked " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initializeControls() {
+        Button linkedInButton = (Button) findViewById(R.id.linkedin);
+        linkedInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLinkedIn();
+            }
+        });
+    }
+
+    private void handleLinkedIn() {
+        LISessionManager.getInstance(getApplicationContext()).init(this, buildScope(), new AuthListener() {
+            @Override
+            public void onAuthSuccess() {
+                // Authentication was successful.  You can now do
+                // other calls with the SDK.
+                fetchPersonalInfo();
+            }
+
+            @Override
+            public void onAuthError(LIAuthError error) {
+                // Handle authentication errors
+                Toast.makeText(SettingsActivity.this, "errr" + error.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        }, true);
+    }
+
+    // Build the list of member permissions our LinkedIn session requires
+    private static Scope buildScope() {
+        return Scope.build(Scope.R_BASICPROFILE, Scope.W_SHARE, Scope.R_EMAILADDRESS);
+    }
+
+    private void fetchPersonalInfo() {
+        String url = "https://api.linkedin.com/v1/people/~?format=json";
+
+        APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
+        apiHelper.getRequest(this, url, new ApiListener() {
+            @Override
+            public void onApiSuccess(ApiResponse apiResponse) {
+                // Success!
+                String resp = apiResponse.getResponseDataAsString();
+                Toast.makeText(SettingsActivity.this, resp, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onApiError(LIApiError liApiError) {
+                // Error making GET request!
+                String resp = liApiError.toString();
+                Toast.makeText(SettingsActivity.this, resp, Toast.LENGTH_LONG).show();
             }
         });
     }

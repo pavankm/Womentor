@@ -77,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
         myNameField = (EditText) findViewById(R.id.name);
         mPhoneField = (EditText) findViewById(R.id.phone);
         mProfileImage = findViewById(R.id.profileImage);
-        mBack = findViewById(R.id.back);
+//        mBack = findViewById(R.id.back);
         mConfirm = findViewById(R.id.confirm);
 
         Intent intent = getIntent();
@@ -108,12 +108,12 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        mBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
     }
 
     private void getUserInfo() {
@@ -250,9 +250,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         final List<Item> items = new ArrayList<>();
         for (DomainModel domainModel : domainsList) {
             items.add(new Item(domainModel.getId(), domainModel.getName()));
@@ -262,7 +259,7 @@ public class SettingsActivity extends AppCompatActivity {
         mentor.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(Item item, int position) {
-                Toast.makeText(getApplicationContext(), "clicked " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "clicked " + position, Toast.LENGTH_SHORT).show();
             }
         });
     }

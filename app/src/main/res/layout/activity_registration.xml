@@ -9,16 +9,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="display name"
         android:id ="@+id/name"/>
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioGroup">
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mentor"/>
+            android:text="Mentor"
+            />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

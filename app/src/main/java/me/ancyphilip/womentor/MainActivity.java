@@ -239,14 +239,15 @@ public class MainActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     domainsList.add(postSnapshot.getValue(DomainModel.class));
                 }
                 Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",(Serializable)domainsList);
-                intent.putExtra("BUNDLE",args);
+                args.putSerializable("ARRAYLIST", (Serializable) domainsList);
+                intent.putExtra("BUNDLE", args);
                 startActivity(intent);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

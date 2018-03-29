@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Womentor</string>
     <string name="title_activity_matches">MatchesActivity</string>
+    <string name="email_hint">email</string>
+    <string name="password_hint">password</string>
+    <string name="login_button">Login</string>
+    <string name="registration_display_name">display name</string>
+    <string name="password_restriction">Password should be atleast 6 characters long</string>
 </resources>

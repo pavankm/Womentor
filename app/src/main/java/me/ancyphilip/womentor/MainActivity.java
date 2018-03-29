@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                 usersDb.child(userId).child("connections").child("nope").child(currentUId).setValue(true);
 
-                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "no", Toast.LENGTH_LONG).show();
 
             }
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 usersDb.child(userId).child("connections").child("yup").child(currentUId).setValue(true);
 
                 isConnectionMatch(userId);
-                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "yes", Toast.LENGTH_LONG).show();
             }
 
             @Override

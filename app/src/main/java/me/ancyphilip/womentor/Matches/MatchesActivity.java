@@ -1,13 +1,12 @@
 package me.ancyphilip.womentor.Matches;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +28,8 @@ public class MatchesActivity extends AppCompatActivity {
     private List<MatchesObject> resultsMatches = new ArrayList<>();
 
     private String currentUserID;
+    private TextView mNoChatsMessage;
+    private NestedScrollView mMatchesScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,16 @@ public class MatchesActivity extends AppCompatActivity {
 
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.matches_recycler_view);
+        mMatchesScrollView = findViewById(R.id.matches_scroll_view);
+        mNoChatsMessage = findViewById(R.id.no_matches_text);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
         mMatchesLayoutManager = new LinearLayoutManager(MatchesActivity.this);
         mRecyclerView.setLayoutManager(mMatchesLayoutManager);
-        mMatchesAdapter = new MatchesAdapter(getDataSetMatches(), MatchesActivity.this);
+
+        mMatchesAdapter = new MatchesAdapter(getDataSetMatches(), MatchesActivity.this, mNoChatsMessage, mMatchesScrollView);
         mRecyclerView.setAdapter(mMatchesAdapter);
 
         getUserMatchID();

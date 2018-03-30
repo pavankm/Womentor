@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.ancyphilip.womentor.ChooseLoginOrRegistrationActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="me.ancyphilip.womentor.ChooseLoginOrRegistrationActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_app_icon"
+        android:minHeight="300dp"
         android:paddingTop="50dp"
-        android:minHeight="300dp"/>
+        android:src="@drawable/ic_app_icon" />
 
     <TextView
         android:layout_width="match_parent"
@@ -22,16 +22,22 @@
         android:text="connect and meet like minded women and mentors."
         android:textColor="@color/black"
         android:textStyle="italic" />
+
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/login"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text ="Login"
-        android:id="@+id/login"/>
+        android:gravity="center_horizontal"
+        android:text="Login" />
+
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/register"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
-        android:text ="Register"
-        android:id="@+id/register"/>
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="Register" />
 
 </LinearLayout>

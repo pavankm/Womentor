@@ -27,7 +27,8 @@
             android:name=".Matches.MatchesActivity"
             android:label="@string/title_activity_matches"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Chat.ChatActivity"></activity>
+        <activity android:name=".Chat.ChatActivity" />
+        <activity android:name=".ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

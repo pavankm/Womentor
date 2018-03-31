@@ -6,25 +6,27 @@
     android:padding="10sp">
 
     <ImageView
+        android:id="@+id/MatchImage"
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:src="@mipmap/ic_woman_foreground"
-        android:id="@+id/MatchImage"/>
+
+        android:src="@mipmap/ic_woman_foreground" />
 
     <LinearLayout
-        android:paddingLeft="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:paddingLeft="20sp">
 
         <TextView
             android:id="@+id/Matchid"
-            android:paddingBottom="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Match ID" />
+            android:paddingBottom="20sp"
+            android:text="Match ID"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/MatchName"

@@ -28,6 +28,12 @@
         android:layout_height="wrap_content"
         android:text="@string/login_button" />
 
+    <Button
+        android:id="@+id/forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password" />
+
     <ProgressBar
         android:id="@+id/login_progress_bar"
         style="@style/Base.Widget.AppCompat.ProgressBar"

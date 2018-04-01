@@ -267,4 +267,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
         startActivity(intent);
     }
+
+    public void goToNearby(View view) {
+        Intent intent = new Intent(MainActivity.this, NearbyActivity.class);
+        startActivity(intent);
+    }
 }

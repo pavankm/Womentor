@@ -3,6 +3,7 @@
     package="me.ancyphilip.womentor">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +29,8 @@
             android:label="@string/title_activity_matches"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Chat.ChatActivity" />
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".NearbyActivity"></activity>
     </application>
 
 </manifest>

@@ -27,6 +27,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
+            android:onClick="goToNearby"
+            android:src="@drawable/ic_location"
+            android:text="Nearby" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
             android:onClick="goToDiscover"
             android:src="@drawable/ic_app_icon"
             android:text="Discover"

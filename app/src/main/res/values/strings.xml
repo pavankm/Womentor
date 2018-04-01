@@ -8,4 +8,5 @@
     <string name="password_restriction">Password should be atleast 6 characters long</string>
     <string name="forgot_password">forgot password</string>
     <string name="send_email">Send password reset email</string>
+    <string name="location_permission_rationale">Womentor uses your location to show you nearby users you could connect with</string>
 </resources>

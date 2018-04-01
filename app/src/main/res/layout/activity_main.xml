@@ -29,7 +29,8 @@
             android:background="@color/white"
             android:onClick="goToDiscover"
             android:src="@drawable/ic_app_icon"
-            android:text="Discover" />
+            android:text="Discover"
+            android:visibility="gone" />
 
         <ImageButton
             android:layout_width="wrap_content"

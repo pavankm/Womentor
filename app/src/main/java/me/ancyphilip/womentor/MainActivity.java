@@ -1,8 +1,8 @@
 package me.ancyphilip.womentor;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     Toast.makeText(MainActivity.this, "new connection", Toast.LENGTH_LONG).show();
 
-                    String key=FirebaseDatabase.getInstance().getReference().child("Chat").push().getKey();
+                    String key = FirebaseDatabase.getInstance().getReference().child("Chat").push().getKey();
                     //usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
                     usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).child("ChatId").setValue(key);
 
@@ -261,7 +261,6 @@ public class MainActivity extends AppCompatActivity {
     public void goToDiscover(View view) {
         Intent intent = new Intent(MainActivity.this, DiscoverActivity.class);
         startActivity(intent);
-
     }
 
     public void goToMatches(View view) {

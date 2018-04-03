@@ -5,182 +5,226 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="me.ancyphilip.womentor.SettingsActivity"
-    android:isScrollContainer="true">
+    tools:context="me.ancyphilip.womentor.SettingsActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingBottom="2dp">
+        android:layout_marginBottom="40sp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="100sp"
-                android:layout_height="100sp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/imagewithborder"
-                android:padding="1sp"
-                android:src="@mipmap/ic_launcher" />
-        </RelativeLayout>
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="name"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="phone number"
-            android:inputType="phone"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:visibility="gone" />
-
-        <EditText
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20sp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="location"
-            android:inputType="phone"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-
-        <EditText
-            android:id="@+id/position"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="position"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-        <EditText
-            android:id="@+id/company"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="company"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-        <EditText
-            android:id="@+id/bio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="about you"
-            android:inputType="phone"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-
-        <!--Social media-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <ImageButton
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="300sp"
+                android:layout_height="300sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="260sp"
+                android:background="@drawable/imagewithborder"
+                android:padding="1sp"
+                android:src="@mipmap/ic_launcher" />
+
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="10sp"
+                android:background="@null"
+                android:hint="name"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="10sp"
+                android:background="@null"
+                android:hint="phone number"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:src="@drawable/ic_facebook" />
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="10sp"
+                android:background="@null"
+                android:hint="location"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/position"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:src="@drawable/ic_twitter" />
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="10sp"
 
-            <ImageButton
-                android:layout_width="wrap_content"
+                android:background="@null"
+                android:hint="position"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/company"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:src="@drawable/ic_linkedin" />
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="10sp"
 
+                android:background="@null"
+                android:hint="company"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="10sp"
+                android:background="@null"
+                android:hint="about you"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <!--Social media-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:src="@drawable/ic_facebook" />
+
+                <EditText
+                    android:id="@+id/facebook_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:background="@null"
+                    android:hint="Facebook username"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:src="@drawable/ic_twitter" />
+
+                <EditText
+                    android:id="@+id/twitter_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:background="@null"
+                    android:hint="Twitter handle"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:layout_marginBottom="20sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:src="@drawable/ic_linkedin" />
+
+                <EditText
+                    android:id="@+id/linkedin_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:background="@null"
+                    android:hint="LinkedIn username"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+
+            </LinearLayout>
+
+            <!--Skills selection-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="5sp"
+                    android:text="skills"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <me.gujun.android.taggroup.TagGroup
+                    android:id="@+id/tag_group_mentor"
+                    style="@style/TagGroup" />
+
+                <com.anton46.collectionitempicker.CollectionPicker
+                    android:id="@+id/collection_item_picker_mentor"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:cp_addIcon="@android:drawable/ic_menu_add"
+                    app:cp_cancelIcon="@android:drawable/ic_menu_close_clear_cancel"
+                    app:cp_itemBackgroundNormal="@color/red"
+                    app:cp_itemBackgroundPressed="@color/stawberry"
+                    app:cp_itemMargin="5dp"
+                    app:cp_simplified="false"
+                    app:cp_textPaddingBottom="5dp"
+                    app:cp_textPaddingLeft="10dp"
+                    app:cp_textPaddingRight="10dp"
+                    app:cp_textPaddingTop="5dp" />
+
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
 
-    <!--Skills selection-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingTop="2dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingTop="5sp"
-            android:text="skills"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-    <me.gujun.android.taggroup.TagGroup
-        android:id="@+id/tag_group_mentor"
-        style="@style/TagGroup" />
-
-    <com.anton46.collectionitempicker.CollectionPicker
-        android:id="@+id/collection_item_picker_mentor"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:cp_addIcon="@android:drawable/ic_menu_add"
-        app:cp_cancelIcon="@android:drawable/ic_menu_close_clear_cancel"
-        app:cp_itemBackgroundNormal="@color/red"
-        app:cp_itemBackgroundPressed="@color/stawberry"
-        app:cp_itemMargin="5dp"
-        app:cp_textPaddingBottom="5dp"
-        app:cp_textPaddingLeft="10dp"
-        app:cp_textPaddingRight="10dp"
-        app:cp_textPaddingTop="5dp"
-        app:cp_simplified="false" />
-
-    </LinearLayout>
-
-    <!--logout and confirm-->
+    </ScrollView><!--logout and confirm-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

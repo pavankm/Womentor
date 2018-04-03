@@ -2,6 +2,7 @@ package me.ancyphilip.womentor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -51,43 +52,6 @@ public class DiscoverActivity extends Activity {
         fetchUsers(null);
     }
 
-    private void fetchDomains() {
-
-        DatabaseReference domainsDb = FirebaseDatabase.getInstance().getReference().child("Domains");
-        final Query query = domainsDb.orderByKey();
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    mDomainModels.add(postSnapshot.getValue(DomainModel.class));
-                }
-                DomainSpinnerAdapter domainSpinnerAdapter = new DomainSpinnerAdapter(getApplicationContext(),
-                        mDomainModels);
-                spin.setAdapter(domainSpinnerAdapter);
-                spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        DomainModel domainModel = mDomainModels.get(i);
-                        fetchUsers(domainModel.getId());
-                        Toast.makeText(getApplicationContext(), "clicked " + domainModel.getName(), Toast.LENGTH_SHORT)
-                                .show();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
     private void fetchUsers(final String domain) {
 
 
@@ -100,6 +64,9 @@ public class DiscoverActivity extends Activity {
                 for (final DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     if (TextUtils.isEmpty(domain)) {
                         mUserModels.add(postSnapshot.getValue(UserModel.class));
+                        UserModel model = mUserModels.get(mUserModels.size() - 1);
+                        model.setUserId(postSnapshot.getKey());
+                        mUserModels.set(mUserModels.size() - 1, model);
                     } else {
                         DatabaseReference domains = usersDb.child(postSnapshot.getKey());
                         domains.child("domains").addValueEventListener(new ValueEventListener() {
@@ -134,8 +101,12 @@ public class DiscoverActivity extends Activity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         UserModel userModel = mUserModels.get(i);
-                        Toast.makeText(getApplicationContext(), "clicked " + userModel.getName(), Toast.LENGTH_SHORT)
-                                .show();
+
+                        Intent profileViewIntent = new Intent(DiscoverActivity.this, ProfileActivity.class);
+                        profileViewIntent.putExtra("userID", userModel.getUserId());
+                        startActivity(profileViewIntent);
+
+//                        Toast.makeText(getApplicationContext(), "clicked " + userModel.getName(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

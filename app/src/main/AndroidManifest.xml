@@ -30,7 +30,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Chat.ChatActivity" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".NearbyActivity"></activity>
+        <activity android:name=".NearbyActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

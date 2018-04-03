@@ -112,7 +112,12 @@ public class MainActivity extends AppCompatActivity {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
-                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_LONG).show();
+                Card obj = (Card) dataObject;
+                String userId = obj.getUserId();
+
+                Intent profileViewIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                profileViewIntent.putExtra("userID", userId);
+                startActivity(profileViewIntent);
             }
         });
 

@@ -46,6 +46,8 @@ public class UserModel {
     private String linkedinUsername;
     private List<String> skills;
 
+    private String userId;
+
 
     public String getName() {
         return name;
@@ -141,5 +143,13 @@ public class UserModel {
 
     public void setSkills(List<String> skills) {
         this.skills = skills;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

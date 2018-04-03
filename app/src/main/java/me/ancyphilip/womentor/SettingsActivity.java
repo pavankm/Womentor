@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText mFBField;
     private EditText mTwitterField;
     private EditText mLinkedInField;
+    private EditText mSkillsField;
 
     private ImageView mProfileImage;
 
@@ -67,7 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
     private String facebookUsername;
     private String twitterHandle;
     private String linkedinUsername;
-
+    private List<String> skills;
     private String profileImgUrl;
 
     private String userType;
@@ -100,7 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
         mFBField = (EditText) findViewById(R.id.settings_facebook_username);
         mTwitterField = (EditText) findViewById(R.id.settings_twitter_username);
         mLinkedInField = (EditText) findViewById(R.id.settings_linkedin_username);
-
+        mSkillsField = (EditText) findViewById(R.id.settings_skills);
 
         mProfileImage = findViewById(R.id.settings_profile_image);
 //        mBack = findViewById(R.id.back);
@@ -187,6 +190,10 @@ public class SettingsActivity extends AppCompatActivity {
                         linkedinUsername = map.get("linkedin_username").toString();
                         mLinkedInField.setText(linkedinUsername);
                     }
+                    if (map.get("skills") != null) {
+                        skills = (List<String>) map.get("skills");
+                        mSkillsField.setText(TextUtils.join(", ", skills));
+                    }
 
                     Glide.clear(mProfileImage);
                     if (map.get("profileImageUrl") != null) {
@@ -222,6 +229,7 @@ public class SettingsActivity extends AppCompatActivity {
         facebookUsername = mFBField.getText().toString();
         twitterHandle = mTwitterField.getText().toString();
         linkedinUsername = mLinkedInField.getText().toString();
+        skills = Arrays.asList(TextUtils.split(mSkillsField.getText().toString().trim(), "\\s*,\\s*"));
 
 
         Map userInfo = new HashMap();
@@ -231,9 +239,10 @@ public class SettingsActivity extends AppCompatActivity {
         userInfo.put("jobTitle", jobTitle);
         userInfo.put("company", company);
         userInfo.put("bio", bio);
-        userInfo.put("facebook_username", facebookUsername);
-        userInfo.put("twitter_handle", twitterHandle);
-        userInfo.put("linkedin_username", linkedinUsername);
+        userInfo.put("facebookUsername", facebookUsername);
+        userInfo.put("twitterHandle", twitterHandle);
+        userInfo.put("linkedinUsername", linkedinUsername);
+        userInfo.put("skills", skills);
 
 
         mUserDatabase.updateChildren(userInfo);

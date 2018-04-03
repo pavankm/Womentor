@@ -3,6 +3,7 @@ package me.ancyphilip.womentor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -21,15 +22,16 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import me.ancyphilip.womentor.Cards.Card;
 import me.ancyphilip.womentor.Cards.arrayAdapter;
-import me.ancyphilip.womentor.Cards.cards;
 import me.ancyphilip.womentor.Matches.MatchesActivity;
 import me.ancyphilip.womentor.Models.DomainModel;
 
 public class MainActivity extends AppCompatActivity {
-    private cards cards_data[];
+    private Card card_data[];
 
     private me.ancyphilip.womentor.Cards.arrayAdapter arrayAdapter;
     private int i;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<DomainModel> domainsList = new ArrayList<DomainModel>();
 
     ListView listView;
-    List<cards> rowItems;
+    List<Card> rowItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         checkUserType();
 
 
-        rowItems = new ArrayList<cards>();
+        rowItems = new ArrayList<Card>();
 
 
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems);
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                cards obj = (cards) dataObject;
+                Card obj = (Card) dataObject;
                 String userId = obj.getUserId();
 
                 usersDb.child(userId).child("connections").child("nope").child(currentUId).setValue(true);
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                cards obj = (cards) dataObject;
+                Card obj = (Card) dataObject;
                 String userId = obj.getUserId();
 
                 usersDb.child(userId).child("connections").child("yup").child(currentUId).setValue(true);
@@ -143,6 +145,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String userType;
     private String oppositeUserType;
+    private String location;
+    private String jobTitle;
+    private String company;
+    private List<String> skills;
 
     public void checkUserType() {
         //TODO: Add prefernces child for interest in both usertypes
@@ -192,7 +198,20 @@ public class MainActivity extends AppCompatActivity {
                     if (!dataSnapshot.child("profileImageUrl").getValue().equals("default")) {
                         profileImageUrl = dataSnapshot.child("profileImageUrl").getValue().toString();
                     }
-                    cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), profileImageUrl);
+                    if (dataSnapshot.hasChild("location"))
+                        location = dataSnapshot.child("location").getValue().toString();
+                    else location = null;
+                    if (dataSnapshot.hasChild("jobTitle"))
+                        jobTitle = dataSnapshot.child("jobTitle").getValue().toString();
+                    else jobTitle = null;
+                    if (dataSnapshot.hasChild("company"))
+                        company = dataSnapshot.child("company").getValue().toString();
+                    else company = null;
+                    if (dataSnapshot.hasChild("skills"))
+                        skills = Arrays.asList(TextUtils.split(dataSnapshot.child("skills").getValue().toString().trim(), "\\s*,\\s*"));
+                    else skills = null;
+                    Card item = new Card(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(),
+                            profileImageUrl, location, jobTitle, company, skills);
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
 

@@ -29,7 +29,8 @@
             android:background="@color/white"
             android:onClick="goToNearby"
             android:src="@drawable/ic_location"
-            android:text="Nearby" />
+            android:text="Nearby"
+            android:visibility="gone" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -38,8 +39,7 @@
             android:background="@color/white"
             android:onClick="goToDiscover"
             android:src="@drawable/ic_app_icon"
-            android:text="Discover"
-            android:visibility="gone" />
+            android:text="Discover" />
 
         <ImageButton
             android:layout_width="wrap_content"

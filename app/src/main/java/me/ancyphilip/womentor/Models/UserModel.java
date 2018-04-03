@@ -1,21 +1,30 @@
 package me.ancyphilip.womentor.Models;
 
 public class UserModel {
-
-    public UserModel(String name, String phone, String email) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-    }
+//
+//    public UserModel(String name, String phone, String email) {
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//    }
 
     public UserModel() {
     }
+
+    public UserModel(String name, String phone, String email, String profileImageUrl) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.profileImageUrl = profileImageUrl;
+    }
+
 
     private String name;
 
     private String phone;
 
     private String email;
+    private String profileImageUrl;
 
 
     public String getName() {
@@ -42,4 +51,11 @@ public class UserModel {
         this.email = email;
     }
 
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 }

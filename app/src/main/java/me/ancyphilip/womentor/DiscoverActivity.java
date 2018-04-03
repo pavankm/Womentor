@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +46,7 @@ public class DiscoverActivity extends Activity {
         lv = (ListView) findViewById(R.id.usersList);
         spin = (Spinner) findViewById(R.id.domainSpinner);
 
-        fetchDomains();
+//        fetchDomains();
 
         fetchUsers(null);
     }
@@ -60,7 +62,7 @@ public class DiscoverActivity extends Activity {
                     mDomainModels.add(postSnapshot.getValue(DomainModel.class));
                 }
                 DomainSpinnerAdapter domainSpinnerAdapter = new DomainSpinnerAdapter(getApplicationContext(),
-                                                                                     mDomainModels);
+                        mDomainModels);
                 spin.setAdapter(domainSpinnerAdapter);
                 spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -68,7 +70,7 @@ public class DiscoverActivity extends Activity {
                         DomainModel domainModel = mDomainModels.get(i);
                         fetchUsers(domainModel.getId());
                         Toast.makeText(getApplicationContext(), "clicked " + domainModel.getName(), Toast.LENGTH_SHORT)
-                             .show();
+                                .show();
                     }
 
                     @Override
@@ -104,7 +106,7 @@ public class DiscoverActivity extends Activity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 Iterable<DataSnapshot> snapshots = dataSnapshot.getChildren();
-                                for (DataSnapshot dataSnapshot1: snapshots) {
+                                for (DataSnapshot dataSnapshot1 : snapshots) {
                                     if (dataSnapshot1.getKey().equals(domain)) {
                                         mUserModels.add(postSnapshot.getValue(UserModel.class));
                                     }
@@ -115,6 +117,7 @@ public class DiscoverActivity extends Activity {
                                 mUserAdapter.notifyDataSetChanged();
 
                             }
+
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                             }
@@ -132,7 +135,7 @@ public class DiscoverActivity extends Activity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         UserModel userModel = mUserModels.get(i);
                         Toast.makeText(getApplicationContext(), "clicked " + userModel.getName(), Toast.LENGTH_SHORT)
-                             .show();
+                                .show();
                     }
                 });
             }
@@ -152,7 +155,8 @@ public class DiscoverActivity extends Activity {
         private class ViewHolder {
             TextView name;
             TextView email;
-            TextView phone;
+            ImageView profileImage;
+//            TextView phone;
         }
 
         public UserAdapter(ArrayList<UserModel> data, Context context) {
@@ -168,7 +172,7 @@ public class DiscoverActivity extends Activity {
             Object object = getItem(position);
             UserModel dataModel = (UserModel) object;
             Toast.makeText(getContext(), dataModel.getName() + " .. is shown in " + position, Toast.LENGTH_SHORT)
-                 .show();
+                    .show();
         }
 
         private int lastPosition = -1;
@@ -187,9 +191,10 @@ public class DiscoverActivity extends Activity {
                 viewHolder = new ViewHolder();
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(R.layout.discover_row_item, parent, false);
-                viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-                viewHolder.email = (TextView) convertView.findViewById(R.id.email);
-                viewHolder.phone = (TextView) convertView.findViewById(R.id.phone);
+                viewHolder.name = (TextView) convertView.findViewById(R.id.discover_name);
+                viewHolder.email = (TextView) convertView.findViewById(R.id.discover_email);
+                viewHolder.profileImage = (ImageView) convertView.findViewById(R.id.discover_dp);
+//                viewHolder.phone = (TextView) convertView.findViewById(R.id.phone);
 
                 result = convertView;
 
@@ -201,7 +206,8 @@ public class DiscoverActivity extends Activity {
 
             viewHolder.name.setText(dataModel.getName());
             viewHolder.email.setText(dataModel.getEmail());
-            viewHolder.phone.setText(dataModel.getPhone());
+            Glide.with(convertView.getContext()).load(dataModel.getProfileImageUrl()).into(viewHolder.profileImage);
+//            viewHolder.phone.setText(dataModel.getPhone());
             // Return the completed view to render on screen
             return convertView;
         }

@@ -2,28 +2,42 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:layout_margin="5dp"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/email"
-            android:layout_margin="5dp"/>
+            <ImageView
+                android:id="@+id/discover_dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/phone"
-            android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/discover_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/discover_dp" />
 
+            <TextView
+                android:id="@+id/discover_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/discover_name"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/discover_dp" />
+
+            <!--<TextView-->
+            <!--android:id="@+id/phone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp" />-->
+        </RelativeLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.anton46.collectionitempicker.CollectionPicker;
 import com.anton46.collectionitempicker.Item;
@@ -48,18 +47,37 @@ public class SettingsActivity extends AppCompatActivity {
 
     private EditText myNameField;
     private EditText mPhoneField;
-    private Button mBack;
-    private Button mConfirm;
-    private ImageView mProfileImage;
+    private EditText mLocationField;
+    private EditText mJobTitleField;
+    private EditText mCompanyField;
+    private EditText mBioField;
+    private EditText mFBField;
+    private EditText mTwitterField;
+    private EditText mLinkedInField;
 
-    private FirebaseAuth mAuth;
-    private DatabaseReference mUserDatabase;
+    private ImageView mProfileImage;
 
     private String userId;
     private String name;
     private String phone;
-    private String userType;
+    private String location;
+    private String jobTitle;
+    private String company;
+    private String bio;
+    private String facebookUsername;
+    private String twitterHandle;
+    private String linkedinUsername;
+
     private String profileImgUrl;
+
+    private String userType;
+
+    private Button mBack;
+    private Button mConfirm;
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mUserDatabase;
+
     private Uri resultUri;
     private ArrayList<DomainModel> domainsList = new ArrayList<DomainModel>();
     private HashMap<String, String> domainMap = new HashMap<>();
@@ -73,12 +91,20 @@ public class SettingsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
 
-        // TODO: 2/24/18 more fields for profile information
-        myNameField = (EditText) findViewById(R.id.name);
-        mPhoneField = (EditText) findViewById(R.id.phone);
-        mProfileImage = findViewById(R.id.profileImage);
+        myNameField = (EditText) findViewById(R.id.settings_name);
+        mPhoneField = (EditText) findViewById(R.id.settings_phone);
+        mLocationField = (EditText) findViewById(R.id.settings_location);
+        mJobTitleField = (EditText) findViewById(R.id.settings_job_title);
+        mCompanyField = (EditText) findViewById(R.id.settings_company);
+        mBioField = (EditText) findViewById(R.id.settings_bio);
+        mFBField = (EditText) findViewById(R.id.settings_facebook_username);
+        mTwitterField = (EditText) findViewById(R.id.settings_twitter_username);
+        mLinkedInField = (EditText) findViewById(R.id.settings_linkedin_username);
+
+
+        mProfileImage = findViewById(R.id.settings_profile_image);
 //        mBack = findViewById(R.id.back);
-        mConfirm = findViewById(R.id.confirm);
+        mConfirm = findViewById(R.id.settings_confirm);
 
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
@@ -133,6 +159,35 @@ public class SettingsActivity extends AppCompatActivity {
                     if (map.get("type") != null) {
                         userType = map.get("type").toString();
                     }
+                    if (map.get("location") != null) {
+                        location = map.get("location").toString();
+                        mLocationField.setText(location);
+                    }
+                    if (map.get("jobTitle") != null) {
+                        jobTitle = map.get("jobTitle").toString();
+                        mJobTitleField.setText(jobTitle);
+                    }
+                    if (map.get("company") != null) {
+                        company = map.get("company").toString();
+                        mCompanyField.setText(company);
+                    }
+                    if (map.get("bio") != null) {
+                        bio = map.get("bio").toString();
+                        mBioField.setText(bio);
+                    }
+                    if (map.get("facebook_username") != null) {
+                        facebookUsername = map.get("facebook_username").toString();
+                        mFBField.setText(facebookUsername);
+                    }
+                    if (map.get("twitter_handle") != null) {
+                        twitterHandle = map.get("twitter_handle").toString();
+                        mTwitterField.setText(twitterHandle);
+                    }
+                    if (map.get("linkedin_username") != null) {
+                        linkedinUsername = map.get("linkedin_username").toString();
+                        mLinkedInField.setText(linkedinUsername);
+                    }
+
                     Glide.clear(mProfileImage);
                     if (map.get("profileImageUrl") != null) {
                         switch ((String) map.get("profileImageUrl")) {
@@ -160,10 +215,27 @@ public class SettingsActivity extends AppCompatActivity {
     private void saveUserInformation() {
         name = myNameField.getText().toString();
         phone = mPhoneField.getText().toString();
+        location = mLocationField.getText().toString();
+        jobTitle = mJobTitleField.getText().toString();
+        company = mCompanyField.getText().toString();
+        bio = mBioField.getText().toString();
+        facebookUsername = mFBField.getText().toString();
+        twitterHandle = mTwitterField.getText().toString();
+        linkedinUsername = mLinkedInField.getText().toString();
+
 
         Map userInfo = new HashMap();
         userInfo.put("name", name);
         userInfo.put("phone", phone);
+        userInfo.put("location", location);
+        userInfo.put("jobTitle", jobTitle);
+        userInfo.put("company", company);
+        userInfo.put("bio", bio);
+        userInfo.put("facebook_username", facebookUsername);
+        userInfo.put("twitter_handle", twitterHandle);
+        userInfo.put("linkedin_username", linkedinUsername);
+
+
         mUserDatabase.updateChildren(userInfo);
 
         if (resultUri != null) {
@@ -227,7 +299,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> snapshots = dataSnapshot.getChildren();
-                for (DataSnapshot dataSnapshot1: snapshots) {
+                for (DataSnapshot dataSnapshot1 : snapshots) {
                     if (0L == (long) dataSnapshot1.getValue()) {
                         menteeDomains.add(domainMap.get(dataSnapshot1.getKey()));
                     } else {
@@ -235,7 +307,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }
                 TagGroup mTagGroupMentor = (TagGroup) findViewById(R.id.tag_group_mentor);
-                if(menteeDomains.size() > 0) {
+                if (menteeDomains.size() > 0) {
 
                     String[] mentorDomainStrings = new String[mentorDomains.size()];
                     mentorDomainStrings = mentorDomains.toArray(mentorDomainStrings);

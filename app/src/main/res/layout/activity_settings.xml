@@ -21,7 +21,7 @@
 
 
             <ImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/settings_profile_image"
                 android:layout_width="300sp"
                 android:layout_height="300sp"
                 android:layout_gravity="center"
@@ -33,23 +33,25 @@
 
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/settings_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginLeft="10sp"
-                android:background="@null"
+                android:layout_marginRight="5sp"
+                android:background="@drawable/edittext_shadow"
                 android:hint="name"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
             <EditText
-                android:id="@+id/phone"
+                android:id="@+id/settings_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginLeft="10sp"
-                android:background="@null"
+                android:layout_marginRight="5sp"
+                android:background="@drawable/edittext_shadow"
                 android:hint="phone number"
                 android:inputType="phone"
                 android:textColor="@color/black"
@@ -57,50 +59,50 @@
                 android:visibility="gone" />
 
             <EditText
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
+                android:id="@+id/settings_location"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginLeft="10sp"
-                android:background="@null"
+                android:layout_marginRight="5sp"
+                android:background="@drawable/edittext_shadow"
                 android:hint="location"
-                android:inputType="phone"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
             <EditText
-                android:id="@+id/position"
+                android:id="@+id/settings_job_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginLeft="10sp"
-
-                android:background="@null"
-                android:hint="position"
+                android:layout_marginRight="5sp"
+                android:background="@drawable/edittext_shadow"
+                android:hint="job title"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
             <EditText
-                android:id="@+id/company"
+                android:id="@+id/settings_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginLeft="10sp"
-
-                android:background="@null"
+                android:layout_marginRight="5sp"
+                android:background="@drawable/edittext_shadow"
                 android:hint="company"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
             <EditText
-                android:id="@+id/bio"
+                android:id="@+id/settings_bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginLeft="10sp"
-                android:background="@null"
+                android:layout_marginRight="5sp"
+                android:background="@drawable/edittext_shadow"
                 android:hint="about you"
-                android:inputType="phone"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
@@ -119,11 +121,12 @@
                     android:src="@drawable/ic_facebook" />
 
                 <EditText
-                    android:id="@+id/facebook_username"
+                    android:id="@+id/settings_facebook_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
-                    android:background="@null"
+                    android:layout_marginRight="5sp"
+                    android:background="@drawable/edittext_shadow"
                     android:hint="Facebook username"
                     android:inputType="text"
                     android:textColor="@color/black"
@@ -144,11 +147,12 @@
                     android:src="@drawable/ic_twitter" />
 
                 <EditText
-                    android:id="@+id/twitter_username"
+                    android:id="@+id/settings_twitter_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
-                    android:background="@null"
+                    android:layout_marginRight="5sp"
+                    android:background="@drawable/edittext_shadow"
                     android:hint="Twitter handle"
                     android:inputType="text"
                     android:textColor="@color/black"
@@ -170,11 +174,12 @@
                     android:src="@drawable/ic_linkedin" />
 
                 <EditText
-                    android:id="@+id/linkedin_username"
+                    android:id="@+id/settings_linkedin_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
-                    android:background="@null"
+                    android:layout_marginRight="5sp"
+                    android:background="@drawable/edittext_shadow"
                     android:hint="LinkedIn username"
                     android:inputType="text"
                     android:textColor="@color/black"
@@ -232,7 +237,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/confirm"
+            android:id="@+id/settings_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

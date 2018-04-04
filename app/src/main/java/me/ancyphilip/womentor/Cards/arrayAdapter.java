@@ -53,7 +53,7 @@ public class arrayAdapter extends ArrayAdapter<Card> {
             jobTitle.setVisibility(View.VISIBLE);
         }
         if (card_item.getSkills() != null) {
-            skills.setText(TextUtils.join(", ", card_item.getSkills().toArray()));
+            skills.setText(TextUtils.join(", ", card_item.getSkills().toArray()).replace("[", "").replace("]", ""));
             skills.setVisibility(View.VISIBLE);
         }
 

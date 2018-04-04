@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +26,7 @@ public class MatchesActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mMatchesAdapter;
     private RecyclerView.LayoutManager mMatchesLayoutManager;
+    private Button mBack;
     private List<MatchesObject> resultsMatches = new ArrayList<>();
 
     private String currentUserID;
@@ -41,8 +43,16 @@ public class MatchesActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.matches_recycler_view);
         mMatchesScrollView = findViewById(R.id.matches_scroll_view);
         mNoChatsMessage = findViewById(R.id.no_matches_text);
+        mBack = findViewById(R.id.matches_back);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         mMatchesLayoutManager = new LinearLayoutManager(MatchesActivity.this);
         mRecyclerView.setLayoutManager(mMatchesLayoutManager);

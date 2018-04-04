@@ -22,4 +22,12 @@
 
     <include layout="@layout/content_matches" />
 
+    <Button
+        android:id="@+id/matches_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:drawableLeft="@drawable/ic_back"
+        android:text="back" />
+
 </android.support.design.widget.CoordinatorLayout>

@@ -21,6 +21,15 @@
 
         </ListView>
 
+        <Button
+            android:id="@+id/discover_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:drawableLeft="@drawable/ic_back"
+            android:text="back" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

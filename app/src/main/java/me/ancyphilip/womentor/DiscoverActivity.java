@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -33,10 +34,12 @@ import me.ancyphilip.womentor.Models.UserModel;
 public class DiscoverActivity extends Activity {
 
     private ListView lv;
+    private Button mBack;
     private UserAdapter mUserAdapter;
     private ArrayList<UserModel> mUserModels = new ArrayList<>();
     private ArrayList<DomainModel> mDomainModels = new ArrayList<>();
     private DatabaseReference usersDb;
+
     Spinner spin;
 
     @Override
@@ -46,7 +49,14 @@ public class DiscoverActivity extends Activity {
 
         lv = (ListView) findViewById(R.id.usersList);
         spin = (Spinner) findViewById(R.id.domainSpinner);
+        mBack = (Button) findViewById(R.id.discover_back);
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 //        fetchDomains();
 
         fetchUsers(null);

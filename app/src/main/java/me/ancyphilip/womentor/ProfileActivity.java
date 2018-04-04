@@ -204,5 +204,26 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void openFacebookURL(View view) {
+        if (facebookUsername != null) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/" + facebookUsername));
+            startActivity(browserIntent);
+        }
+    }
+
+    public void openTwitterURL(View view) {
+        if (twitterHandle != null) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitter.com/" + twitterHandle));
+            startActivity(browserIntent);
+        }
+    }
+
+    public void openLinkedInURL(View view) {
+        if (linkedinUsername != null) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/" + linkedinUsername));
+            startActivity(browserIntent);
+        }
+    }
+
 
 }

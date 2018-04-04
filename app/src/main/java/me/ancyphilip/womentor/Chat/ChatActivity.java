@@ -1,8 +1,7 @@
 package me.ancyphilip.womentor.Chat;
 
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import me.ancyphilip.womentor.Matches.MatchesAdapter;
-import me.ancyphilip.womentor.Matches.MatchesObject;
 import me.ancyphilip.womentor.R;
 
 public class ChatActivity extends AppCompatActivity {
@@ -124,9 +121,25 @@ public class ChatActivity extends AppCompatActivity {
                         if (createdByUser.equals(currentUserID)) {
                             currentUserBoolean = true;
                         }
-                        ChatObject newMessage = new ChatObject(message, currentUserBoolean);
-                        resultsChat.add(newMessage);
-                        mChatAdapter.notifyDataSetChanged();
+
+                        final ChatObject newMessage = new ChatObject(message, currentUserBoolean, "", "");
+
+                        FirebaseDatabase.getInstance().getReference().child("Users")
+                                .child(createdByUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                newMessage.setCreatedBy(dataSnapshot.child("name").getValue().toString());
+                                newMessage.setProfileImageUrl(dataSnapshot.child("profileImageUrl").getValue().toString());
+                                resultsChat.add(newMessage);
+                                mChatAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }
                 }
             }

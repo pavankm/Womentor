@@ -9,11 +9,15 @@ public class ChatObject {
 
     private String message;
     private Boolean currentUser;
+    private String createdBy;
+    private String profileImageUrl;
 
 
-    public ChatObject(String message, Boolean currentUser) {
+    public ChatObject(String message, Boolean currentUser, String createdBy, String profileImageUrl) {
         this.message = message;
         this.currentUser = currentUser;
+        this.createdBy = createdBy;
+        this.profileImageUrl = profileImageUrl;
     }
 
 
@@ -31,5 +35,21 @@ public class ChatObject {
 
     public void setCurrentUser(Boolean currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 }

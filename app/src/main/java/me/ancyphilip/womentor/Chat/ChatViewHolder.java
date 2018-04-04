@@ -1,7 +1,5 @@
 package me.ancyphilip.womentor.Chat;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +15,8 @@ import me.ancyphilip.womentor.R;
 public class ChatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView mMessage;
     public LinearLayout mContainer;
+    public TextView mSender;
+    public ImageView mProfileImage;
 
     public ChatViewHolder(View itemView) {
         super(itemView);
@@ -24,8 +24,7 @@ public class ChatViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         mMessage = itemView.findViewById(R.id.message);
         mContainer = itemView.findViewById(R.id.container);
-
-
+        mSender = itemView.findViewById(R.id.sender);
     }
 
     @Override
